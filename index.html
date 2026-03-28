@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Shalu! 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb, #ffb199);
+            background-size: 500% 500%;
+            animation: gradientBG 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #4a4a4a;
+            perspective: 1000px; /* For 3D transitions */
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card-container {
+            width: 95%;
+            max-width: 1000px;
+            height: 680px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            transform-style: preserve-3d;
+        }
+
+        /* --- 3D SLIDE TRANSITIONS --- */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 30px 40px 80px 40px;
+            box-sizing: border-box;
+            display: flex;
+            opacity: 0;
+            /* Cool 3D sweeping transition */
+            transform: translateX(50%) rotateY(-20deg) scale(0.9);
+            transition: all 0.9s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0) rotateY(0deg) scale(1);
+            pointer-events: auto;
+            visibility: visible;
+        }
+
+        .slide.previous {
+            transform: translateX(-50%) rotateY(20deg) scale(0.9);
+            opacity: 0;
+        }
+
+        .collage-side { flex: 1.2; position: relative; height: 100%; }
+        .notes-side { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; position: relative; z-index: 10; }
+
+        /* --- POLAROID ANIMATIONS --- */
+        .polaroid {
+            background: white;
+            padding: 10px 10px 40px 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            position: absolute;
+            border-radius: 4px;
+            width: 170px;
+            height: 170px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: #ffeaa7;
+            border-radius: 3px;
+        }
+
+        .polaroid:hover {
+            transform: scale(1.2) rotate(0deg) translateY(-10px) !important;
+            z-index: 100 !important;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation-play-state: paused;
+        }
+
+        /* Scattered Photo Positions */
+        .p1 { top: 5%; left: 5%; transform: rotate(-8deg); z-index: 2; animation-delay: 0s;}
+        .p2 { top: 30%; right: 5%; transform: rotate(12deg); z-index: 3; animation-delay: 1s;}
+        .p3 { bottom: 10%; left: 10%; transform: rotate(-5deg); z-index: 4; animation-delay: 2s;}
+        .p4 { top: 45%; right: 30%; transform: rotate(8deg); z-index: 1; animation-delay: 0.5s;} 
+        .p5 { bottom: 15%; right: 15%; transform: rotate(-10deg); z-index: 5; animation-delay: 1.5s;}
+
+        /* --- WASHI TAPE NOTES --- */
+        .note {
+            padding: 25px 30px;
+            border-radius: 5px;
+            box-shadow: 4px 6px 15px rgba(0,0,0,0.1);
+            position: relative;
+            width: 85%;
+            font-family: 'Caveat', cursive;
+            font-size: 1.7em;
+            color: #2d3436;
+            line-height: 1.3;
+            animation: floatNote 8s ease-in-out infinite alternate;
+        }
+
+        /* Washi Tape Effect */
+        .note::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 90px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.4);
+            border-left: 2px dashed rgba(0,0,0,0.1);
+            border-right: 2px dashed rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            z-index: 2;
+        }
+
+        .n-yellow { background-color: #fff9c4; transform: rotate(-2deg); }
+        .n-pink { background-color: #ffdde1; transform: rotate(3deg); animation-delay: 1s;}
+        .n-blue { background-color: #e0f7fa; transform: rotate(-1deg); animation-delay: 2s;}
+        .n-purple { background-color: #f3e5f5; transform: rotate(2deg); animation-delay: 0.5s;}
+        .n-green { background-color: #e8f5e9; transform: rotate(-3deg); animation-delay: 1.5s;}
+
+        .note-title {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.9em;
+            font-weight: bold;
+            color: #ff6b81;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- STICKER ANIMATIONS --- */
+        .sticker {
+            position: absolute;
+            font-size: 3em;
+            filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.2));
+            user-select: none;
+            z-index: 20;
+        }
+        .pulse { animation: pulse 2s infinite; }
+        .swing { animation: swing 3s ease-in-out infinite; transform-origin: top center; }
+        .spin { animation: spin 10s linear infinite; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+            50% { transform: translateY(-10px) rotate(var(--rot, 0deg)); }
+        }
+        @keyframes floatNote {
+            0% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+            100% { transform: translateY(-5px) rotate(calc(var(--rot, 0deg) + 1deg)); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        @keyframes swing {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* --- BUTTONS --- */
+        .controls {
+            position: absolute;
+            bottom: 25px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 50px;
+            box-sizing: border-box;
+            z-index: 100;
+        }
+
+        button {
+            background: linear-gradient(45deg, #ff7675, #fd79a8);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(253, 121, 168, 0.4);
+            transition: all 0.3s;
+        }
+
+        button:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 20px rgba(253, 121, 168, 0.6); }
+        button:disabled { background: #dfe6e9; color: #b2bec3; box-shadow: none; cursor: not-allowed; transform: none; }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        
+        <div class="slide active">
+            <div class="collage-side">
+                <div class="polaroid p1" style="--rot: -8deg;"><img src="1 (1).jpg" alt="Pic"></div>
+                <div class="polaroid p2" style="--rot: 12deg;"><img src="1 (2).jpg" alt="Pic"></div>
+                <div class="polaroid p3" style="--rot: -5deg;"><img src="1 (3).jpg" alt="Pic"></div>
+                <div class="sticker pulse" style="top: 10%; right: 20%;">🌸</div>
+                <div class="sticker swing" style="bottom: 20%; left: 40%;">🦋</div>
+            </div>
+            <div class="notes-side">
+                <div class="note n-yellow" style="--rot: -2deg;">
+                    <div class="note-title">For Shalu</div>
+                    Happy Birthday, Shalu! 🎉<br>
+                    I made this digital scrapbook just for you to celebrate today!
+                </div>
+                <div class="note n-pink" style="width: 70%; margin-left: 20px; --rot: 3deg;">
+                    "Ready to see something cute?" ✨
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="collage-side">
+                <div class="polaroid p4" style="--rot: 8deg;"><img src="1 (4).jpg" alt="Pic"></div>
+                <div class="polaroid p1" style="--rot: -8deg;"><img src="1 (5).jpg" alt="Pic"></div>
+                <div class="polaroid p5" style="--rot: -10deg;"><img src="1 (6).jpg" alt="Pic"></div>
+                <div class="sticker pulse" style="top: 20%; left: 10%;">🧸</div>
+            </div>
+            <div class="notes-side">
+                <div class="note n-blue" style="--rot: -1deg;">
+                    <div class="note-title">Why you're amazing</div>
+                    Shalu, sorry i know maine bahoot galti ki h and krta bhi hoon i know.. 
+                </div>
+                <div class="note n-purple" style="width: 75%; margin-right: 20px; --rot: 2deg;">
+                    but i wanna tell u maine kabhi tumhare liye galat nhi socha sorry.... 🎀
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="collage-side">
+                <div class="polaroid p2" style="top: 10%; --rot: 12deg;"><img src="1 (7).jpg" alt="Pic"></div>
+                <div class="polaroid p3" style="bottom: 25%; --rot: -5deg;"><img src="1 (8).jpg" alt="Pic"></div>
+                <div class="polaroid p1" style="top: 50%; left: 30%; --rot: -8deg;"><img src="1 (9).jpg" alt="Pic"></div>
+                <div class="sticker spin" style="top: 40%; left: 10%;">🌻</div>
+            </div>
+            <div class="notes-side">
+                <div class="note n-green" style="--rot: -3deg;">
+                    <div class="note-title">Good Times</div>
+                    Every moment spent with you becomes a precious memory.
+                </div>
+                <div class="note n-yellow" style="width: 80%; --rot: -2deg;">
+                    "see how u are looking beutiful in saree . kaise tumko main tumko hurt kr sakta hoon " 🍭
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="collage-side">
+                <div class="polaroid p4" style="left: 20%; --rot: 8deg;"><img src="1 (10).jpg" alt="Pic"></div>
+                <div class="polaroid p2" style="top: 50%; --rot: 12deg;"><img src="1 (11).jpg" alt="Pic"></div>
+                <div class="sticker pulse" style="bottom: 30%; right: 20%; font-size: 4em;">💌</div>
+            </div>
+            <div class="notes-side">
+                <div class="note n-pink" style="width: 90%; --rot: 3deg;">
+                    <div class="note-title">A little secret...</div>
+                    I just wanted to say that you mean a lot to me. Getting to know you has been the best part of my year.
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="collage-side">
+                <div class="polaroid p1" style="--rot: -8deg;"><img src="1 (12).jpg" alt="Pic"></div>
+                <div class="polaroid p3" style="left: 40%; --rot: -5deg;"><img src="1 (13).jpg" alt="Pic"></div>
+                <div class="polaroid p5" style="top: 10%; right: 10%; --rot: -10deg;"><img src="1 (14).jpg" alt="Pic"></div>
+                <div class="sticker swing" style="top: 20%; left: 40%;">🍒</div>
+            </div>
+            <div class="notes-side">
+                <div class="note n-purple" style="--rot: 2deg;">
+                    <div class="note-title">Looking stunning!</div>
+                    Seriously, how do you always look so good in pictures?😍 main chhata hoon sirf ye bdy hi nhi tumhare har year ka bdy tumko hamesha muskuraye and tumko khush rakhe 
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="collage-side">
+                <div class="polaroid p2" style="--rot: 12deg;"><img src="1 (15).jpg" alt="Pic"></div>
+                <div class="polaroid p4" style="--rot: 8deg;"><img src="1 (16).jpg" alt="Pic"></div>
+                <div class="sticker pulse" style="bottom: 15%; left: 15%; font-size: 3.5em;">🎂</div>
+                <div class="sticker" style="top: 10%; left: 10%; font-size: 2em;">✨</div>
+            </div>
+            <div class="notes-side">
+                <div class="note n-blue" style="--rot: -1deg;">
+                    A request from u . 
+                </div>
+                <div class="note n-yellow" style="width: 60%; margin-left: 30px; --rot: -2deg;">
+                    please khush rehna mera tabiyat thik nhi reh raha h shayd hm rahe ya na rahe 😊but please tum apne bdy mein mereko yaad krogi and ek flower 💐god ko dogi main rahoon ya na rahoon i wish mere liye itna kr sakti ho🌟
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="collage-side">
+                <div class="polaroid p1" style="top: 30%; left: 20%; --rot: -8deg;"><img src="1 (17).jpg" alt="Pic"></div>
+                <div class="polaroid p3" style="top: 20%; right: 20%; --rot: -5deg;"><img src="1 (18).jpg" alt="Pic"></div>
+                <div class="sticker swing" style="top: 50%; right: 40%; font-size: 3em;">🥳</div>
+            </div>
+            <div class="notes-side">
+                <div class="note n-green" style="--rot: -3deg;">
+                    sorry maine bahoot hurt kiya h and bahoot pareshan krta hooon tumko i know this scrapbook is not only for bdy wish it was for sorry scrapbook that maine bahoot adhik galtiya ki h😔 and tumko hurt kiya uske liye. seriously main kabhi tumko problem mein nhi dekh sakta but ye jo mera mind h na pagal h
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="collage-side">
+                <div class="polaroid p2" style="top: 25%; left: 30%; --rot: 12deg;"><img src="1 (22).jpg" alt="Pic"></div>
+                <div class="sticker pulse" style="top: 10%; left: 20%; font-size: 4em;">💖</div>
+                <div class="sticker swing" style="bottom: 30%; right: 20%; font-size: 4em;">🥂</div>
+            </div>
+            <div class="notes-side">
+                <div class="note n-pink" style="width: 90%; height: 70%; display: flex; flex-direction: column; justify-content: center; --rot: 3deg;">
+                    <div class="note-title">Have the best day!</div>
+                    Enjoy your special day to the absolute fullest.<br><br>
+                    sryyyyyyyyy shaluuuuuuu😭😭😭 
+                    tum mere liye bahoot mayne rakhti ho i know aaj tumko bahoot log wish krenge but tum jo seh rahi ho na andar andar ronaa ate hue bhi tum ro nhi pa rahi ho main samjh sakta hoon isliye maine itne pyar se ye sab time nikal kr bana raha hoon kuch dino se and finnaly its done .<br><br>
+                    Yours truly,<br>
+                    <strong>[Ashuuuu]</strong> ❤️
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="prevBtn" onclick="changeSlide(-1)" disabled>Back</button>
+            <button id="nextBtn" onclick="changeSlide(1)">Next ➔</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function changeSlide(direction) {
+            // Remove active classes
+            slides[currentSlide].classList.remove('active');
+            slides[currentSlide].classList.add('previous');
+            
+            // Wait for transition, then hide properly
+            setTimeout(() => {
+                document.querySelectorAll('.slide:not(.active)').forEach(s => s.classList.remove('previous'));
+            }, 900);
+
+            // Update slide index
+            currentSlide += direction;
+            
+            // Add active class to new slide
+            slides[currentSlide].classList.add('active');
+            
+            // Button states
+            prevBtn.disabled = currentSlide === 0;
+            if (currentSlide === slides.length - 1) {
+                nextBtn.style.display = 'none'; 
+            } else {
+                nextBtn.style.display = 'block'; 
+                nextBtn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
